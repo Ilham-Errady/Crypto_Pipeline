@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  
+  minio:
+    image: minio/minio
+    container_name: minio_server
+    ports:
+      - "9000:9000" 
+      - "9001:9001" 
+    volumes:
+      - minio_data:/data  
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    restart: always
+
+  airflow:
+    image: apache/airflow:2.7.1-python3.10
+    container_name: airflow_orchestrator
+    user: "${AIRFLOW_UID:-50000}:0" 
+    ports:
+      - "8080:8080"  
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts_pipeline:/opt/airflow/scripts_pipeline
+      - ./config:/opt/airflow/config
+      - ./database_local:/opt/airflow/database_local
+    environment:
+      AIRFLOW__CORE__EXECUTOR: "SequentialExecutor"
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"  
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: "sqlite:////opt/airflow/airflow.db"
+      # 🔐 تثبيت معطيات الدخول هنا بـ شكل دائم
+      AIRFLOW_WWW_USER_USERNAME: "admin"
+      AIRFLOW_WWW_USER_PASSWORD: "admin"
+    command: standalone
+    restart: always
+
+volumes:
+  minio_data:
