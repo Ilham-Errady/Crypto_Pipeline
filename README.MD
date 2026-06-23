@@ -27,7 +27,7 @@ This project delivers a robust, automated Big Data architecture designed to inge
 2. **Storage Layer (MinIO Data Lake):** An S3-compatible object storage infrastructure serving as our localized multi-tier Lakehouse^^.
 3. **Data Warehousing (Snowflake DWH):** Automated target loading using dimensional modeling constructs optimized for analytical querying^^.
 
-## 📂 Project Directory Structure 
+## 📂 Project Directory Structure
 
 As structured and deployed within the development environment shown in `image_d330d9.png`, the workspace is organized into highly decoupled pipeline layers:
 
@@ -48,7 +48,7 @@ Following data processing and transformation, the warehouse layer transforms the
 
 ![1781797060062](image/README/1781797060062.png)
 
-### Data Dictionary
+Data Dictionary
 
 #### 1. `FACT_CRYPTO_METRICS` (Fact Table)
 

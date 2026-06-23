@@ -8,7 +8,7 @@ import pandas as pd
 # ----------------------------------------------------
 s3_client = boto3.client(
     's3', 
-    endpoint_url="http://minio:9000",  # 👈 هادي هي اللي غاتخليهم يتواصلوا داخل Docker
+    endpoint_url="http://minio:9000",  
     aws_access_key_id="minioadmin", 
     aws_secret_access_key="minioadmin"
 )
